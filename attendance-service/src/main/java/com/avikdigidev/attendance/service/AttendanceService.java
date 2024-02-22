@@ -1,16 +1,19 @@
 package com.avikdigidev.attendance.service;
 
+import com.avikdigidev.attendance.constants.AttendanceConstants;
 import com.avikdigidev.attendance.exceptions.NoDataFoundException;
 import com.avikdigidev.attendance.model.AttendanceRecord;
 import com.avikdigidev.attendance.repository.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import static com.avikdigidev.attendance.constants.AttendanceConstants.SWIPE_IN_TOPIC;
+import static com.avikdigidev.attendance.constants.AttendanceConstants.SWIPE_OUT_TOPIC;
 
 
 @Service
@@ -22,15 +25,11 @@ public class AttendanceService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    @Value("${app.kafka.topic.swipe-in}")
-    private String swipeInTopic;
-    @Value("${app.kafka.topic.swipe-out}")
-    private String swipeOutTopic;
 
     public void swipeIn(String employeeId) {
         // Business logic for swipe in operation
         attendanceRepository.save(AttendanceRecord.builder().employeeId(employeeId).swipeInTimestamp(LocalDateTime.now()).build());
-        kafkaTemplate.send(swipeInTopic, employeeId);
+        kafkaTemplate.send(SWIPE_IN_TOPIC, employeeId);
     }
 
     public void swipeOut(String employeeId) throws NoDataFoundException {
@@ -42,7 +41,7 @@ public class AttendanceService {
             attendanceRecord.setSwipeOutTimestamp(LocalDateTime.now());
             attendanceRepository.save(attendanceRecord);
             // Publish swipe out event to Kafka
-            kafkaTemplate.send(swipeOutTopic, employeeId);
+            kafkaTemplate.send(SWIPE_OUT_TOPIC, employeeId);
         } else {
             throw new NoDataFoundException("No swipe in record found for employee: " + employeeId, "EMP_NF_001");
         }
@@ -54,7 +53,7 @@ public class AttendanceService {
         List<AttendanceRecord> swipeInRecords = attendanceRepository.findFirstByEmployeeIdAndDateOrderByTimestampDesc(employeeId, LocalDateTime.now().toLocalDate());
 
         if (swipeInRecords.isEmpty()) {
-            return "Absent"; // Employee didn't swipe in, so mark as absent
+            return AttendanceConstants.ABSENT; // Employee didn't swipe in, so mark as absent
         }
 
         // Assuming the last swipe-in is considered as the start of the workday
@@ -73,7 +72,7 @@ public class AttendanceService {
         // Determine attendance status based on total hours
         String attendanceStatus;
         if (totalHours < 4) {
-            attendanceStatus = "Absent";
+            attendanceStatus = AttendanceConstants.ABSENT;
         } else if (totalHours >= 4 && totalHours < 8) {
             attendanceStatus = "Half Day";
         } else {
@@ -86,7 +85,7 @@ public class AttendanceService {
     // Method to calculate attendance status based on total hours worked
     private String calculateAttendanceStatus(long totalHours) {
         if (totalHours < 4) {
-            return "Absent";
+            return AttendanceConstants.ABSENT;
         } else if (totalHours >= 4 && totalHours < 8) {
             return "Half Day";
         } else {

@@ -1,20 +1,25 @@
 package com.avikdigidev.eventservice.service;
 
+import com.avikdigidev.eventservice.model.Event;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.*;
 import org.springframework.stereotype.*;
+
+import java.util.List;
 
 @Service
 public class EventService {
 
-    @KafkaListener(topics = "swipe-in-topic")
-    public void handleSwipeInEvent(String message) {
-        // Process swipe in event received from Kafka
-        System.out.println("Received swipe in event: " + message);
+
+
+    @Autowired
+    private EventRepository eventRepository;
+
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
-    @KafkaListener(topics = "swipe-out-topic")
-    public void handleSwipeOutEvent(String message) {
-        // Process swipe out event received from Kafka
-        System.out.println("Received swipe out event: " + message);
+    public Event createEvent(Event event) {
+        return eventRepository.save(event);
     }
 }
