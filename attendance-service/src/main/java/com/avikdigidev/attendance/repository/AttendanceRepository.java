@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface AttendanceRepository extends JpaRepository<AttendanceRecord, Long> {
+public interface AttendanceRepository extends JpaRepository<AttendanceRecord, String> {
 
     List<AttendanceRecord> findFirstByEmployeeIdAndDateOrderBySwipeInTimestampAsc(String employeeId, LocalDate date);
     List<AttendanceRecord> findFirstByEmployeeIdAndDateOrderByTimestampDesc(String employeeId, LocalDate date);

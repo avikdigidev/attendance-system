@@ -1,12 +1,18 @@
 type Query {
-    attendanceInfo(date: String!): AttendanceInfoResponse
-    totalHours(employeeId: String!): TotalHoursResponse
+    getAttendanceInfo(date: String!): AttendanceInfoResponse
+    getAttendanceStatus(employeeId: String!): TotalHoursResponse
 }
 
 type AttendanceInfoResponse {
-    absentees: [String]
-    halfDayWorkers: [String]
-    fullDayWorkers: [String]
+    absentees: [EmployeeResponse]
+    halfDayWorkers: [EmployeeResponse]
+    fullDayWorkers: [EmployeeResponse]
+}
+
+type EmployeeResponse {
+    employeeId: String
+    name: String
+    department: String
 }
 type TotalHoursResponse {
     employeeId: ID!
