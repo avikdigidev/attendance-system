@@ -5,7 +5,6 @@ import com.avikdigidev.attendance.dto.response.EmployeeStatusResponse;
 import com.avikdigidev.attendance.model.AttendanceRecord;
 import com.avikdigidev.attendance.repository.AttendanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
@@ -19,17 +18,13 @@ public class AttendanceService {
     @Autowired
     private AttendanceRepository attendanceRepository;
 
-    @Autowired
-    private KafkaTemplate<String, String> kafkaTemplate;
-
-
     // Method to calculate end of day total hours and update attendance status
     public EmployeeStatusResponse getAttendanceStatus(String employeeId) {
         EmployeeStatusResponse response = new EmployeeStatusResponse();
         response.setEmployeeId(employeeId);
 
         // Retrieve all swipe-in records for the employee for the current day
-        List<AttendanceRecord> swipeInRecords = attendanceRepository.findFirstByEmployeeIdAndDateOrderByTimestampDesc(employeeId, LocalDateTime.now().toLocalDate());
+        List<AttendanceRecord> swipeInRecords = attendanceRepository.findFirstByEmployeeIdAndDateOrderBySwipeInTimestampDesc(employeeId, LocalDateTime.now().toLocalDate());
 
         if (swipeInRecords.isEmpty()) {
             response.setStatus(AttendanceConstants.ABSENT); // Employee didn't swipe in, so mark as absent
@@ -45,7 +40,7 @@ public class AttendanceService {
         LocalDateTime endOfDay = lastSwipeOutRecord != null ? lastSwipeOutRecord.getSwipeOutTimestamp() : LocalDateTime.now();
 
         // Calculate total hours worked
-        long totalHours =  Duration.between(startOfDay, endOfDay).toHours();
+        long totalHours = Duration.between(startOfDay, endOfDay).toHours();
         response.setTotalHours((double) totalHours);
         // Determine attendance status based on total hours
         response.setStatus(calculateAttendanceStatus(totalHours));

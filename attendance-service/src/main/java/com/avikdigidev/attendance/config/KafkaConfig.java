@@ -1,34 +1,38 @@
 package com.avikdigidev.attendance.config;
 
-import org.apache.kafka.clients.producer.ProducerConfig;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.kafka.clients.admin.NewTopic;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.config.TopicBuilder;
 
-import java.util.HashMap;
-import java.util.Map;
+import static com.avikdigidev.attendance.constants.AttendanceConstants.*;
 
 @Configuration
 public class KafkaConfig {
 
-    @Value("${spring.kafka.bootstrap-servers}")
-    private String bootstrapServers;
+
+    private final Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
-        Map<String, Object> configProps = new HashMap<>();
-        configProps.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
-        // Add other Kafka producer properties as needed
-
-        return new DefaultKafkaProducerFactory<>(configProps);
+    public NewTopic topic() {
+        return TopicBuilder.name(SWIPE_IN_TOPIC).build();
     }
 
-    @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
-        return new KafkaTemplate<>(producerFactory());
+
+    @KafkaListener(topics = SWIPE_IN_TOPIC, groupId = ATTENDANCE_GROUP_ID)
+    public void listenSwipeInEvent(String message) {
+        logger.info(message);
+        // Logic to handle swipe in event
     }
+
+    @KafkaListener(topics = SWIPE_OUT_TOPIC, groupId = ATTENDANCE_GROUP_ID)
+    public void listenSwipeOutEvent(String message) {
+        logger.info(message);
+    }
+
+
 }
 
