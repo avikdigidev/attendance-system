@@ -7,16 +7,15 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/attendance")
 public class AttendanceController {
 
 
     @Autowired
     private AttendanceService attendanceService;
+
 
     @QueryMapping
     public ResponseEntity<EmployeeStatusResponse> getAttendanceStatus(@Argument String employeeId) {
@@ -27,7 +26,6 @@ public class AttendanceController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
 
 
 }

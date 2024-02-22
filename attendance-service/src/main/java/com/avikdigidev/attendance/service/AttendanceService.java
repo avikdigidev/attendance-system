@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 
 @Service
@@ -22,16 +24,18 @@ public class AttendanceService {
     public EmployeeStatusResponse getAttendanceStatus(String employeeId) {
         EmployeeStatusResponse response = new EmployeeStatusResponse();
         response.setEmployeeId(employeeId);
+        // Format the current date as a string in 'yyyy-MM-dd' format
+        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
         // Retrieve all swipe-in records for the employee for the current day
-        List<AttendanceRecord> swipeInRecords = attendanceRepository.findFirstByEmployeeIdAndDateOrderBySwipeInTimestampDesc(employeeId, LocalDateTime.now().toLocalDate());
+        Optional<AttendanceRecord> swipeInRecords = attendanceRepository.getRecords(employeeId, LocalDate.parse(date) );
 
-        if (swipeInRecords.isEmpty()) {
+        if (swipeInRecords.isPresent()) {
             response.setStatus(AttendanceConstants.ABSENT); // Employee didn't swipe in, so mark as absent
         }
 
         // Assuming the last swipe-in is considered as the start of the workday
-        LocalDateTime startOfDay = swipeInRecords.get(0).getSwipeInTimestamp().toLocalDate().atStartOfDay();
+        LocalDateTime startOfDay = swipeInRecords.get().getSwipeInTimestamp().toLocalDate().atStartOfDay();
 
         // Retrieve the last swipe-out record for the employee for the current day (if any)
         AttendanceRecord lastSwipeOutRecord = attendanceRepository.findFirstByEmployeeIdAndDateAndSwipeOutTimestampNotNullOrderBySwipeOutTimestampDesc(employeeId, LocalDateTime.now().toLocalDate());

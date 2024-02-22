@@ -1,0 +1,9 @@
+type Query {
+    getAttendanceStatus(employeeId: String!): EmployeeStatusResponse
+}
+
+type EmployeeStatusResponse {
+    employeeId: ID!
+    totalHours: Float!
+    status:  String
+}
