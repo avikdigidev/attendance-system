@@ -1,28 +1,33 @@
 **Sequence diagram**
 link: https://sequencediagram.org/
-title Event-Driven Architecture for Attendance System
+title Event-Driven Attendance System Flow
 
-participant "Employee" as Emp
-participant "Event Store Microservice" as ES
+participant "(MS)Attendance REST API" as API
+participant "(MS)Event Service" as ES
 participant "Kafka" as K
-participant "Attendance Microservice" as AS
-participant "Attendance Database" as DB
+participant "Cassandra" as Cass
+participant "(MS)Attendance Calculation Service" as ACS
+participant "(MS)Attendance Read Store" as ARS
+participant "MySQL" as SQL
 
-note over Emp: Employee swipes in/out
+note over ACS: Consumer for Kafka topic: Swipe Event\nPublisher for Kafka topic: EOD Calculation
 
-Emp->ES: Swipe In
-ES->K: Publish Swipe In Event
-K->AS: Consume Swipe In Event
-note over K: Kafka topics:\n- swipe-in-topic\n- swipe-out-topic
-AS->DB: Update Attendance Record
+note over ARS: Consumer for Kafka topic: EOD Calculation
 
-Emp->ES: Swipe Out
-ES->K: Publish Swipe Out Event
-K->AS: Consume Swipe Out Event
-AS->DB: Update Attendance Record
+note over API: Employee swipes in/out
+API->ES: POST /events/swipe
+ES->K: Publish Swipe Event
+note over K:Kafka topic: Swipe Event
+ACS->K: Consume Swipe Event
+ACS->Cass:Write consumed swipe events
+Cass->ACS:Query swipe events
+ACS->ACS: Perform EOD calculation
+ACS->K: Publish EOD Calculation Event
+note over K: Kafka topic: EOD Calculation
+ARS->K: Consume EOD Calculation Event
+ARS->SQL: Persist attendance records
+API->SQL: Retrieve attendance records
 
-note over AS: Perform End-of-Day Calculation
-AS->DB: Calculate Total Hours for Employees
 
 
 
@@ -86,6 +91,13 @@ INSERT INTO attendance_db.attendance_record (id, date, employee_id, swipe_in_tim
 (UUID(),'2024-02-23', '10', '2024-02-23 10:30:00', '2024-02-23 18:30:00');
 
 
+#cassandra
+docker run --name attendance_cassandra -d -e CASSANDRA_USER=username -e CASSANDRA_PASSWORD=8105xj379jss -p 8100:9042 cassandra:latest
+
+docker start attendance_cassandra
+
+--script
+CREATE KEYSPACE attendance_sys WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 3};
 
 
 #kafka
