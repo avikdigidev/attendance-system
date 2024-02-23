@@ -1,20 +1,30 @@
 package com.avikdigidev.eventservice.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import lombok.*;
+import org.springframework.data.cassandra.core.cql.PrimaryKeyType;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKeyColumn;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-@Entity
+import java.time.Instant;
+
+import static com.avikdigidev.eventservice.constants.AppConstants.EVENT_DETAILS;
+
+@Table(EVENT_DETAILS)
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
 public class Event {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
+    @PrimaryKeyColumn(name = "employeeid", ordinal = 0, type = PrimaryKeyType.PARTITIONED)
     private String employeeId;
+    @PrimaryKeyColumn(name = "eventtimestamp", ordinal = 1, type = PrimaryKeyType.CLUSTERED)
+    private Instant eventTimestamp;
+    @Column(value = "eventtype")
+    private String eventType;
 
-    private EventType eventType;
 
-    // Constructors, getters, and setters
 }

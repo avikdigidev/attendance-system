@@ -1,6 +1,7 @@
 package com.avikdigidev.eventservice.controller;
 
 import com.avikdigidev.eventservice.model.Event;
+import com.avikdigidev.eventservice.model.SwipeEvent;
 import com.avikdigidev.eventservice.service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +23,8 @@ public class EventController {
     }
 
     @PostMapping
-    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
-        Event createdEvent = eventService.createEvent(event);
+    public ResponseEntity<Event> createEvent(@RequestBody SwipeEvent swipeEvent) {
+        Event createdEvent = eventService.createEvent(swipeEvent);
         return ResponseEntity.ok(createdEvent);
     }
 

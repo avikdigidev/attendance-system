@@ -1,6 +1,8 @@
 package com.avikdigidev.eventservice.service;
 
 import com.avikdigidev.eventservice.model.Event;
+import com.avikdigidev.eventservice.model.SwipeEvent;
+import com.avikdigidev.eventservice.repository.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.*;
 import org.springframework.stereotype.*;
@@ -20,7 +22,7 @@ public class EventService {
         return eventRepository.findAll();
     }
 
-    public Event createEvent(Event event) {
+    public Event createEvent(SwipeEvent event) {
         return eventRepository.save(event);
     }
 
