@@ -12,5 +12,5 @@ import lombok.Setter;
 public class EmployeeStatusResponse {
     private String employeeId;
     private Double totalHours;
-    private String status;
+    private AttendanceStatus status;
 }

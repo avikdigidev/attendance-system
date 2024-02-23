@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.TopicBuilder;
 
 import static com.avikdigidev.attendance.constants.AttendanceConstants.SWIPE_IN_TOPIC;
+import static com.avikdigidev.attendance.constants.AttendanceConstants.SWIPE_OUT_TOPIC;
 
 @Configuration
 public class KafkaConfig {
@@ -16,8 +17,13 @@ public class KafkaConfig {
     private final Logger logger = LoggerFactory.getLogger(KafkaConfig.class);
 
     @Bean
-    public NewTopic topic() {
+    public NewTopic swipeInTopic() {
         return TopicBuilder.name(SWIPE_IN_TOPIC).build();
+    }
+
+    @Bean
+    public NewTopic swipeOutTopic() {
+        return TopicBuilder.name(SWIPE_OUT_TOPIC).build();
     }
 
 

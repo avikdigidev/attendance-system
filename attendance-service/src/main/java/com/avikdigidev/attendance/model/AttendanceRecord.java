@@ -25,6 +25,7 @@ public class AttendanceRecord {
 
     @Column(name = "date")
     private LocalDate date;
+    @Id
     @Column(name = "employee_id")
     private String employeeId;
 

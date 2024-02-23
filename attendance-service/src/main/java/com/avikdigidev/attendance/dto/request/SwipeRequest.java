@@ -4,13 +4,12 @@ import lombok.*;
 
 import java.time.*;
 
-@Getter
-@Setter
+@Data
 public class SwipeRequest {
 
 
     private String employeeId;
-    private LocalDateTime swipeInTimestamp;
-    private LocalDateTime swipeOutTimestamp;
+    private LocalDateTime eventTimestamp ;
+    private EventType eventType;
 
 }
