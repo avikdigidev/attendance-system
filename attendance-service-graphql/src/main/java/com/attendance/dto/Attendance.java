@@ -6,10 +6,10 @@ import lombok.Data;
 
 @Data
 public class Attendance {
-	
-	private long employeeid;
-	private String attendance;
+
+	private int employeeId;
+	private String attendanceStatus;
 	private Date date;
-	private String totaltime;
+	private String totalTime;
 
 }

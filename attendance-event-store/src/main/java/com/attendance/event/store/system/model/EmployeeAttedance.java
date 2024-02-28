@@ -7,7 +7,7 @@ import java.sql.Date;
 @Data
 public class EmployeeAttedance {
 
-    private long employeeId;
+    private int employeeId;
     private String attendanceStatus;
     private Date date;
     private String totalTime;

@@ -17,7 +17,7 @@ public class AttendanceDataFetcher {
 	private AttendanceService attendanceService;
 
 	@DgsQuery(field =  "getAttendance")
-	public List<Attendance> getAttendance(@InputArgument long employeeId){
+	public List<Attendance> getAttendance(@InputArgument int employeeId){
 		
 		List<Attendance> attendanceList = attendanceService.getAttendanceData(employeeId);
 		

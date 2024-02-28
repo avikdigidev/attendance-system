@@ -5,8 +5,14 @@ type Query {
 
 type Attendance {
 
-	employeeid : Int
-	attendance : String
+	employeeId : Int
+	attendanceStatus : String
 	date : String
-	totaltime : String
+	totalTime : String
+}
+
+schema {  query: Query
+
+
+
 }
