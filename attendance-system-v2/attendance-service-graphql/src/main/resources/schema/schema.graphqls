@@ -1,0 +1,12 @@
+type Query {
+
+	getAttendance(employeeId : Int) : [Attendance]
+}
+
+type Attendance {
+
+	employeeid : Int
+	attendance : String
+	date : String
+	totaltime : String
+}
