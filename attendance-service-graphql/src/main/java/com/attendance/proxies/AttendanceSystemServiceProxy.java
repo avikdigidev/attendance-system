@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name="ATTENDANCE-SYSTEM-SERVICE")
+@FeignClient(name="attendance-system-service")
 public interface AttendanceSystemServiceProxy {
 
-    @GetMapping("/api/attendance/getAttendance/{employeeId}")
+    @GetMapping("/attendance-system-service/api/attendance/getAttendance/{employeeId}")
     public List<Attendance> retrieveExchangeValue(
             @PathVariable int employeeId);
 

@@ -14,20 +14,15 @@ public class ApiGatewayConfiguration {
 				.route(p -> p
 						.path("/get")
 						.filters(f -> f
-								.addRequestHeader("MyHeader", "MyURI")
-								.addRequestParameter("Param", "MyValue"))
+								.addRequestHeader("api-gateway-custom-header", "test value")
+								.addRequestParameter("param", "test param value"))
 						.uri("http://httpbin.org:80"))
-				.route(p -> p.path("/currency-exchange/**")
-						.uri("lb://currency-exchange"))
-				.route(p -> p.path("/currency-conversion/**")
-						.uri("lb://currency-conversion"))
-				.route(p -> p.path("/currency-conversion-feign/**")
-						.uri("lb://currency-conversion"))
-				.route(p -> p.path("/currency-conversion-new/**")
-						.filters(f -> f.rewritePath(
-								"/currency-conversion-new/(?<segment>.*)", 
-								"/currency-conversion-feign/${segment}"))
-						.uri("lb://currency-conversion"))
+				.route(p -> p.path("/attendance-event-store/**")
+						.uri("lb://attendance-event-store"))
+				.route(p -> p.path("/attendance-system-graphql/**")
+						.uri("lb://attendance-system-graphql"))
+				.route(p -> p.path("/attendance-system-service/**")
+						.uri("lb://attendance-system-service"))
 				.build();
 	}
 
