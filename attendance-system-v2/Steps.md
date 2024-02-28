@@ -37,7 +37,7 @@ attendance-service-gql = 9190
 cassandra =8100
 mysql = 3307
 kafka =9092
-
+config-server= 8888
 
 **setting up the db:**
 #mysql
