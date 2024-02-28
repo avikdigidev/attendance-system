@@ -36,7 +36,8 @@ attendance-service = 8987
 attendance-service-gql = 9190
 cassandra =8100
 mysql = 3307
-kafka =9092
+kafka =9099
+zookeeper= 2881
 config-server= 8888
 
 **setting up the db:**
@@ -115,9 +116,9 @@ CREATE TABLE event_details (
 );
 
 #kafka
-docker pull confluentinc/cp-kafka
+
 \
-docker run -d --name kafka -p 9092:9092 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 confluentinc/cp-kafka
+docker run -d --name kafka -p 9099:9092 -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2881 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9099 -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1 wurstmeister/kafka
 \
 docker exec -it kafka kafka-topics --create --topic swipe-in-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
 \
@@ -125,3 +126,9 @@ docker exec -it kafka kafka-topics --create --topic swipe-out-topic --bootstrap-
 \
 docker exec -it kafka kafka-topics --create --topic eod-total-hours-topic --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1
 
+docker run -d --name zookeeper -p 2881:2181 wurstmeister/zookeeper
+
+#kafka ui
+docker run -d --name kafka-ui -it -p 8080:8080 -e DYNAMIC_CONFIG_ENABLED=true provectuslabs/kafka-ui
+
+docker run -d --name kafka -p 9099:9092   -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2881   -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9099   -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1   wurstmeister/kafka
