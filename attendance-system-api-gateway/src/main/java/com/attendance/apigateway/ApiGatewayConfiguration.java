@@ -15,7 +15,7 @@ public class ApiGatewayConfiguration {
 						.path("/get")
 						.filters(f -> f
 								.addRequestHeader("api-gateway-custom-header", "test value")
-								.addRequestParameter("param", "test param value"))
+								)
 						.uri("http://httpbin.org:80"))
 				.route(p -> p.path("/attendance-event-store/**")
 						.uri("lb://attendance-event-store"))
