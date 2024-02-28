@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "9d65c5ee-edbd-4875-b727-858cb5eca780",
+		"_postman_id": "afd077be-be26-4f2d-827a-e3728e48f92b",
 		"name": "Attendance",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12052215"
 	},
 	"item": [
 		{
@@ -23,17 +24,18 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8987/api/attendance/getAttendance/1",
+					"raw": "http://localhost:8987/attendance-system-service/api/attendance/getAttendance/1600",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8987",
 					"path": [
+						"attendance-system-service",
 						"api",
 						"attendance",
 						"getAttendance",
-						"1"
+						"1600"
 					]
 				}
 			},
@@ -50,23 +52,52 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query{\r\n    getAttendance(employeeId :876){\r\n        employeeid\r\n\t    attendance\r\n        date\r\n\t    totaltime\r\n    }\r\n}",
+						"query": "query{\r\n    getAttendance(employeeId :1600){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
 						"variables": ""
-					},
-					"options": {
-						"raw": {
-							"language": "json"
-						}
 					}
 				},
 				"url": {
-					"raw": "http://localhost:9190/graphql",
+					"raw": "http://192.168.1.37:9190/attendance-system-graphql/graphql",
+					"protocol": "http",
+					"host": [
+						"192",
+						"168",
+						"1",
+						"37"
+					],
+					"port": "9190",
+					"path": [
+						"attendance-system-graphql",
+						"graphql"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Attendance graphql api gateway",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "graphql",
+					"graphql": {
+						"query": "query{\r\n    getAttendance(employeeId :1600){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
+						"variables": ""
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8766/attendance-system-graphql/graphql",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "9190",
+					"port": "8766",
 					"path": [
+						"attendance-system-graphql",
 						"graphql"
 					]
 				}
@@ -75,8 +106,11 @@
 		},
 		{
 			"name": "event store",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
@@ -88,13 +122,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/calculateAttendance",
+					"raw": "http://localhost:8081/attendance-event-store/api/calculateAttendance",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8081",
 					"path": [
+						"attendance-event-store",
 						"api",
 						"calculateAttendance"
 					]
@@ -109,7 +144,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"employeeId\":1,\r\n    \"eventTimestamp\":\"2024-02-27T14:20:30Z\"\r\n}",
+					"raw": "{\r\n    \"employeeId\":1600,\r\n    \"eventTimestamp\":\"2024-02-28T11:20:30Z\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -117,13 +152,44 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/api/swipe",
+					"raw": "http://localhost:8081/attendance-event-store/api/swipe",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8081",
 					"path": [
+						"attendance-event-store",
+						"api",
+						"swipe"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Swipe api gateway",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeeId\":1600,\r\n    \"eventTimestamp\":\"2024-02-27T11:20:30Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8766/attendance-event-store/api/swipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8766",
+					"path": [
+						"attendance-event-store",
 						"api",
 						"swipe"
 					]
