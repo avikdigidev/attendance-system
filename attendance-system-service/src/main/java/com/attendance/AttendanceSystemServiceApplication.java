@@ -1,13 +1,13 @@
-package com.attendance.event.store.system;
+package com.attendance;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+@EnableFeignClients
 @SpringBootApplication
-public class EventStoreSystemApplication {
+public class AttendanceSystemServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EventStoreSystemApplication.class, args);
+		SpringApplication.run(AttendanceSystemServiceApplication.class, args);
 	}
 
 }

@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 rem Set the folder path to search
-set "folder_path=D:\Projects\JavaProjects\attendance-system\attendance-system-v2"
+set "folder_path=D:\Projects\JavaProjects\attendance-system"
 
 
 rem Search for pom.xml file in immediate subfolders

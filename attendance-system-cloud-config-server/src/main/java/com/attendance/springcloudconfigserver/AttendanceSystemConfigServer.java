@@ -6,10 +6,10 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 
 @EnableConfigServer
 @SpringBootApplication
-public class SpringCloudConfigServerApplication {
+public class AttendanceSystemConfigServer {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringCloudConfigServerApplication.class, args);
+		SpringApplication.run(AttendanceSystemConfigServer.class, args);
 	}
 
 }
