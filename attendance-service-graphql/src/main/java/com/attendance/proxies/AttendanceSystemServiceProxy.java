@@ -10,7 +10,7 @@ import java.util.List;
 @FeignClient(name="attendance-system-service")
 public interface AttendanceSystemServiceProxy {
 
-    @GetMapping("/attendance-system-service/api/attendance/getAttendance/{employeeId}")
+    @GetMapping("/attendance-system-service/api/getAttendance/{employeeId}")
     public List<Attendance> retrieveExchangeValue(
             @PathVariable int employeeId);
 
