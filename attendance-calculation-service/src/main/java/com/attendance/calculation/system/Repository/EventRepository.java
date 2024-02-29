@@ -25,7 +25,5 @@ public interface EventRepository extends CassandraRepository<Event, Integer> {
 	List<EventDetail> findLastSwipeOutByEmployeeAndDate(@Param("startDate") Instant startDate,
 			@Param("endDate") Instant endDate);
 
-	@Query("SELECT employeeid, MAX(eventtimestamp) AS timestamp, eventtype " + "FROM event_details "
-			+ "WHERE employeeid= :employeeId ORDER BY eventtimestamp DESC")
-	Optional<Event> findByEmployeeIdAndDate(int employeeId);
+
 }

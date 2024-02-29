@@ -5,7 +5,7 @@ import lombok.Data;
 import java.sql.Date;
 
 @Data
-public class EmployeeAttedance {
+public class EmployeeAttendance {
 
     private int employeeId;
     private String attendanceStatus;
