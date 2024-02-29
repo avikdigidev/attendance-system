@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
 import java.time.*;
 import java.util.HashMap;
 import java.util.List;
@@ -56,7 +57,7 @@ public class AttendanceCalculatorService {
 			EmployeeAttedance employeeAttedance = new EmployeeAttedance();
 			setAttendance(entry.getValue().get(0), entry.getValue().get(1), employeeAttedance);
 			employeeAttedance.setEmployeeId(entry.getKey());
-			employeeAttedance.setDate(null);
+			employeeAttedance.setDate(new Date(System.currentTimeMillis()));
 			sendEmployeeAttendanceEvent(employeeAttedance, sendRecordCount);
 		});
 		return sendRecordCount;
