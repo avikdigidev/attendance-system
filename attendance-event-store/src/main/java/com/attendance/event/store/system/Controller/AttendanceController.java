@@ -27,7 +27,7 @@ public class AttendanceController {
     
 	@GetMapping("/calculateAttendance")
 	private ResponseEntity<String> calculateEmployeeAttendance() {
-		int records = attendanceService.calculateTotalHoursBySwipeInAndOutDate();
+		Integer records = attendanceService.calculateTotalHoursBySwipeInAndOutDate();
 		return ResponseEntity.ok(records + " records updated");
 	}
 }
