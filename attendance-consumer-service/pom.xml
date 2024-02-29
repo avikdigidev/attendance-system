@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.attendance</groupId>
-	<artifactId>attendance-system-service</artifactId>
+	<artifactId>attendance-consumer-service</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>attendance-system-service</name>
-	<description>Attendance Service</description>
+	<name>attendance-consumer-service</name>
+	<description>Consumer service to consume EOD kafka topics and save to DB</description>
 	<properties>
 		<java.version>8</java.version>
 		<maven.compiler.release>8</maven.compiler.release>
@@ -45,6 +45,10 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.kafka</groupId>
+			<artifactId>spring-kafka</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

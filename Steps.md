@@ -2,31 +2,34 @@
 link: https://sequencediagram.org/
 title Event-Driven Attendance System Flow
 
-participant "(MS)Attendance REST API" as API
-participant "(MS)Event Service" as ES
-participant "Kafka" as K
+participant "attendance-service-graphql " as GR
+participant "attendance-system-service " as API
+participant "attndace-event-store" as ES
 participant "Cassandra" as Cass
-participant "(MS)Attendance Calculation Service" as ACS
-participant "(MS)Attendance Read Store" as ARS
+participant "attendance-calculation-service" as ACS
+participant "Kafka" as K
+
+participant "attendance-consumer-service" as ARS
 participant "MySQL" as SQL
 
-note over ACS: Consumer for Kafka topic: Swipe Event\nPublisher for Kafka topic: EOD Calculation
+note over ACS: Publisher for Kafka topic: EOD Calculation
 
+note over API,GR:Only Retrieves
+note over ES:mimics swipe
 note over ARS: Consumer for Kafka topic: EOD Calculation
-
-note over API: Employee swipes in/out
 API->ES: POST /events/swipe
-ES->K: Publish Swipe Event
-note over K:Kafka topic: Swipe Event
-ACS->K: Consume Swipe Event
-ACS->Cass:Write consumed swipe events
+ES->Cass: POST swipeEvent
+note over K:Kafka topic: EOD Calculation
 Cass->ACS:Query swipe events
 ACS->ACS: Perform EOD calculation
 ACS->K: Publish EOD Calculation Event
-note over K: Kafka topic: EOD Calculation
 ARS->K: Consume EOD Calculation Event
 ARS->SQL: Persist attendance records
+GR->API: Graphql- /getAttendance
 API->SQL: Retrieve attendance records
+
+
+
 
 
 #ports

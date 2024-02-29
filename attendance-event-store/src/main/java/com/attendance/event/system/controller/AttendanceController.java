@@ -1,0 +1,25 @@
+package com.attendance.event.system.controller;
+
+
+import com.attendance.event.system.Services.SwipeService;
+import com.attendance.event.system.model.SwipeEvent;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+
+@RestController
+@RequestMapping("/api")
+public class AttendanceController {
+
+    @Autowired
+    private SwipeService swipeService;
+
+    @PostMapping("/swipe")
+    public ResponseEntity<String> swipeEvent(@RequestBody SwipeEvent swipeEvent){
+       String message  = swipeService.processSwipeEvent(swipeEvent);
+       return ResponseEntity.ok(message);
+   }
+    
+
+}
