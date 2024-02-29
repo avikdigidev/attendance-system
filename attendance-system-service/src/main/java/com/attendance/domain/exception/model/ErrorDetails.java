@@ -1,4 +1,4 @@
-package com.attendance.event.system.dto.exception.model;
+package com.attendance.domain.exception.model;
 
 import lombok.Data;
 import org.springframework.http.HttpStatus;

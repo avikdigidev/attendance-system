@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.attendance.domain.entity.Attendance;
+import com.attendance.domain.exception.NoDataFoundException;
 import com.attendance.domain.repository.AttendanceRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +37,11 @@ public class AttendanceService {
 					return employee;
 				}).collect(Collectors.toList());
 			} else {
-				log.info("No details found");
-				throw new RuntimeException("No details found");
+				throw new NoDataFoundException("NO_DATA_FOUND", "No details found for employee with ID: " + employeeId);
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
-			throw new RuntimeException(e.getMessage());
+			throw new NoDataFoundException("EXCEPTION_OCCURRED", "No details found" + e.getMessage());
 		}
 	}
 

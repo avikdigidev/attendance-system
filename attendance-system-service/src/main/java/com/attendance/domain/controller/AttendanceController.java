@@ -19,7 +19,7 @@ public class AttendanceController {
 	private AttendanceService attendanceService;
 
 	@GetMapping("/getAttendance/{employeeId}")
-	public ResponseEntity<List<Employee>> getAttandance(@PathVariable("employeeId") int employeeId) {
+	public ResponseEntity<List<Employee>> getAttandance(@PathVariable("employeeId") Integer employeeId) {
 		
 		List<Employee> employeeList = attendanceService.getEmployeeList(employeeId);
 		
