@@ -1,24 +1,23 @@
 package com.attendance.entity;
 
 
-
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.IdClass;
 import lombok.Data;
 
 import java.sql.Date;
-import java.util.UUID;
-
+@IdClass(AttendanceId.class)
 @Entity
 @Data
 public class Attendance {
-	
+
 
 	@Id
-	private String attendanceId = UUID.randomUUID().toString();
 	private int employeeId;
-	private String attendanceStatus;
+	@Id
 	private Date date;
+
+	private String attendanceStatus;
 	private String totalTime;
 }
