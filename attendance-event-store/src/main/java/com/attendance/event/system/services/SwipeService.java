@@ -1,7 +1,7 @@
-package com.attendance.event.system.Services;
+package com.attendance.event.system.services;
 
 
-import com.attendance.event.system.Repository.SwipeRepository;
+import com.attendance.event.system.repository.SwipeRepository;
 import com.attendance.event.system.dto.Event;
 import com.attendance.event.system.dto.EventType;
 import com.attendance.event.system.model.SwipeEvent;

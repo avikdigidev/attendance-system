@@ -1,4 +1,4 @@
-package com.attendance.calculation.system.Repository;
+package com.attendance.calculation.system.repository;
 
 import com.attendance.calculation.system.dto.EventDetail;
 import com.attendance.calculation.system.dto.Event;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface EventRepository extends CassandraRepository<Event, Integer> {

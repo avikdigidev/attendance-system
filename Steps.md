@@ -135,3 +135,15 @@ docker run -d --name zookeeper -p 2881:2181 wurstmeister/zookeeper
 docker run -d --name kafka-ui -it -p 8080:8080 -e DYNAMIC_CONFIG_ENABLED=true provectuslabs/kafka-ui
 
 docker run -d --name kafka -p 9099:9092   -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2881   -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9099   -e KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1   wurstmeister/kafka
+
+
+#docker images creation command for services
+
+docker build -t attendance-calculation-service:attendance-calculation-service .
+docker build -t attendance-consumer-service:attendance-consumer-service .
+docker build -t attendance-event-store:attendance-event-store .
+docker build -t attendance-service-graphql:attendance-service-graphql .
+docker build -t attendance-system-api-gateway:attendance-system-api-gateway .
+docker build -t attendance-system-cloud-config-server:attendance-system-cloud-config-server .
+docker build -t attendance-system-naming-server:attendance-system-naming-server .
+docker build -t attendance-system-service:attendance-system-service .

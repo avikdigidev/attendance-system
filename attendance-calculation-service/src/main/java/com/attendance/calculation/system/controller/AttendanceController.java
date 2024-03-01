@@ -1,6 +1,6 @@
 package com.attendance.calculation.system.controller;
 
-import com.attendance.calculation.system.Services.AttendanceCalculatorService;
+import com.attendance.calculation.system.services.AttendanceCalculatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +19,7 @@ public class AttendanceController {
 
     
 	@GetMapping("/calculateAttendance")
-	private ResponseEntity<String> calculateEmployeeAttendance() {
+	public ResponseEntity<String> calculateEmployeeAttendance() {
 		Integer records = attendanceService.calculateTotalHoursBySwipeInAndOutDate();
 		return ResponseEntity.ok(records + " records updated");
 	}

@@ -1,7 +1,7 @@
-package com.attendance.calculation.system.Services;
+package com.attendance.calculation.system.services;
 
 import com.attendance.calculation.system.model.EmployeeAttendance;
-import com.attendance.calculation.system.Repository.EventRepository;
+import com.attendance.calculation.system.repository.EventRepository;
 import com.attendance.calculation.system.constants.AppConstants;
 import com.attendance.calculation.system.dto.EventDetail;
 import com.fasterxml.jackson.core.JsonProcessingException;

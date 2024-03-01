@@ -1,7 +1,7 @@
 package com.attendance.event.system.controller;
 
 
-import com.attendance.event.system.Services.SwipeService;
+import com.attendance.event.system.services.SwipeService;
 import com.attendance.event.system.model.SwipeEvent;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,6 @@ public class EventController {
        String message  = swipeService.processSwipeEvent(swipeEvent);
        return ResponseEntity.ok(message);
    }
-    
+
 
 }
