@@ -12,13 +12,13 @@ import java.util.List;
 
 @Repository
 public interface EventRepository extends CassandraRepository<Event, Integer> {
-	@Query("SELECT employeeid, MIN(eventtimestamp) AS timestamp " + "FROM event_details " + "WHERE eventtype = 'SWIPE_IN' "
+	@Query("SELECT employeeid, emailid, MIN(eventtimestamp) AS timestamp " + "FROM event_details " + "WHERE eventtype = 'SWIPE_IN' "
 			+ "AND eventtimestamp >= :startDate " + "AND eventtimestamp < :endDate "
 			+ "GROUP BY employeeid ALLOW FILTERING")
 	List<EventDetail> findFirstSwipeInByEmployeeAndDate(@Param("startDate") Instant startDate,
                                                         @Param("endDate") Instant endDate);
 
-	@Query("SELECT employeeid, MAX(eventtimestamp) AS timestamp " + "FROM event_details " + "WHERE eventtype = 'SWIPE_OUT' "
+	@Query("SELECT employeeid, emailid,  MAX(eventtimestamp) AS timestamp " + "FROM event_details " + "WHERE eventtype = 'SWIPE_OUT' "
 			+ "AND eventtimestamp >= :startDate " + "AND eventtimestamp < :endDate "
 			+ "GROUP BY employeeid ALLOW FILTERING")
 	List<EventDetail> findLastSwipeOutByEmployeeAndDate(@Param("startDate") Instant startDate,

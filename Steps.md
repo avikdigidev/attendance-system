@@ -115,6 +115,7 @@ CREATE TABLE event_details (
     employeeid INT,
     eventtimestamp TIMESTAMP,
     eventtype TEXT,
+    emailid TEXT,
     PRIMARY KEY (employeeid, eventtimestamp)
 );
 

@@ -20,4 +20,7 @@ public class Event {
     @Column
     private String eventtype;
 
+    @Column
+    private String emailid;
+
 }
