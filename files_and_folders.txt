@@ -1,0 +1,31 @@
+ Volume in drive D is Work
+ Volume Serial Number is D059-2D05
+
+ Directory of D:\Projects\JavaProjects\attendance-system
+
+04-03-2024  17:45    <DIR>          .
+04-03-2024  17:45    <DIR>          ..
+22-02-2024  18:47                66 .gitattributes
+28-02-2024  11:07               646 .gitignore
+04-03-2024  17:36    <DIR>          .idea
+14-02-2024  15:27            20,653 Attendance System.docx
+02-03-2024  14:44    <DIR>          attendance-calculation-service
+01-03-2024  13:08    <DIR>          attendance-consumer-service
+04-03-2024  17:13    <DIR>          attendance-email-service
+01-03-2024  14:00    <DIR>          attendance-event-store
+01-03-2024  14:14    <DIR>          attendance-service-graphql
+02-03-2024  22:42    <DIR>          attendance-system-api-gateway
+01-03-2024  13:02    <DIR>          attendance-system-cloud-config-server
+01-03-2024  13:03    <DIR>          attendance-system-naming-server
+01-03-2024  13:04    <DIR>          attendance-system-service
+28-02-2024  22:47             4,087 Attendance.postman_collection.json
+01-03-2024  16:14           112,061 diagrams.pptx
+29-02-2024  12:30             1,101 docker-compose.yml
+04-03-2024  17:45                 0 files_and_folders.txt
+02-03-2024  03:51    <DIR>          git-local-repo
+28-02-2024  12:46               502 mvn batch for all.bat
+28-02-2024  10:49               496 mvn clean batch.bat
+01-03-2024  14:39            75,550 Solution.docx
+02-03-2024  04:53             5,528 Steps.md
+              11 File(s)        220,690 bytes
+              13 Dir(s)  169,415,008,256 bytes free

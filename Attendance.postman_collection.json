@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Get Attendance",
+			"name": "attendance-system-service Get Attendance",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -24,18 +24,51 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8987/attendance-system-service/api/attendance/getAttendance/1600",
+					"raw": "http://localhost:8502/attendance-system-service/api/getAttendance/12",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8987",
+					"port": "8502",
 					"path": [
 						"attendance-system-service",
 						"api",
-						"attendance",
 						"getAttendance",
-						"1600"
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "attendance-system-service Get Attendance api-gateway",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8766/attendance-system-service/api/getAttendance/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8766",
+					"path": [
+						"attendance-system-service",
+						"api",
+						"getAttendance",
+						"12"
 					]
 				}
 			},
@@ -52,20 +85,17 @@
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query{\r\n    getAttendance(employeeId :1600){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
+						"query": "query{\r\n    getAttendance(employeeId :142){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
 						"variables": ""
 					}
 				},
 				"url": {
-					"raw": "http://192.168.1.37:9190/attendance-system-graphql/graphql",
+					"raw": "http://localhost:8501/attendance-system-graphql/graphql",
 					"protocol": "http",
 					"host": [
-						"192",
-						"168",
-						"1",
-						"37"
+						"localhost"
 					],
-					"port": "9190",
+					"port": "8501",
 					"path": [
 						"attendance-system-graphql",
 						"graphql"
@@ -81,11 +111,17 @@
 			},
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJSUzI1NiIsImtpZCI6IjZmOTc3N2E2ODU5MDc3OThlZjc5NDA2MmMwMGI2NWQ2NmMyNDBiMWIiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiNTI5MzA0NTgyMDA4LWFpdHF2Y2VodnFwYjdwOHVtcDU1NnFpbGFhYmtyMHRtLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiNTI5MzA0NTgyMDA4LWFpdHF2Y2VodnFwYjdwOHVtcDU1NnFpbGFhYmtyMHRtLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTE0NDkxMDY2MTE0NzIxNDQwMTE2IiwiZW1haWwiOiJhdmlrZGlnaWRldkBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXRfaGFzaCI6InotYUJiaEdmM0ZXRjd1YkNkd1FVS2ciLCJpYXQiOjE3MDk0MDU1ODEsImV4cCI6MTcwOTQwOTE4MX0.k2I8FI15HM14vq96PLHL3xxgBqd-p8ovjqAOxib_Mjnagh4314B5SF4SsFEfofkvy2aeAJXaJKALSJYYgitA6xdTnyW0pUdnSt0GkT6Ro2v9B6YUJJKcv7wCs4_z5FRS5QMaSf9Yee7Po6od5j2J7Qb3afHcvDuooA6aY5t25NRI1ylkVFg_xL6aRwrdtbHoVNvPS1A8LfuHoCVa5OwvxlOgK2ioZ7BRKDPc4-UzWnK5TNYYvW5f5fjn3pjKvfAmp1kWxmST5kotrvlLPIq9hbKJo_1lzXF6uMt-HoM-UQMeThajhG6gOor7Q94tfNRBrXz2qkjrYqRXLHWNyvI5rw",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "graphql",
 					"graphql": {
-						"query": "query{\r\n    getAttendance(employeeId :1600){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
+						"query": "query{\r\n    getAttendance(employeeId :12){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
 						"variables": ""
 					}
 				},
@@ -105,7 +141,7 @@
 			"response": []
 		},
 		{
-			"name": "event store",
+			"name": "attendance-calculation-service",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -122,14 +158,14 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/attendance-event-store/api/calculateAttendance",
+					"raw": "http://localhost:8504/attendance-calculation-service/api/calculateAttendance",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8504",
 					"path": [
-						"attendance-event-store",
+						"attendance-calculation-service",
 						"api",
 						"calculateAttendance"
 					]
@@ -138,13 +174,16 @@
 			"response": []
 		},
 		{
-			"name": "Swipe",
+			"name": "attendance-calculation-service api gateway",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"employeeId\":1600,\r\n    \"eventTimestamp\":\"2024-02-28T11:20:30Z\"\r\n}",
+					"raw": "",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -152,12 +191,42 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8081/attendance-event-store/api/swipe",
+					"raw": "http://localhost:8766/attendance-calculation-service/api/calculateAttendance",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8081",
+					"port": "8766",
+					"path": [
+						"attendance-calculation-service",
+						"api",
+						"calculateAttendance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "attendance-event-store Swipe",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"employeeId\":-11529,\r\n    \"eventTimestamp\":null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8503/attendance-event-store/api/swipe",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8503",
 					"path": [
 						"attendance-event-store",
 						"api",
@@ -168,13 +237,44 @@
 			"response": []
 		},
 		{
-			"name": "Swipe api gateway",
+			"name": "api gateway",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8766/get",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8766",
+					"path": [
+						"get"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "attendance-event-store gateway",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"employeeId\":1600,\r\n    \"eventTimestamp\":\"2024-02-27T11:20:30Z\"\r\n}",
+					"raw": "{\r\n    \"employeeId\":999,\r\n    \"eventTimestamp\":\"2024-02-27T21:20:30Z\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -193,6 +293,178 @@
 						"api",
 						"swipe"
 					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "529304582008-aitqvcehvqpb7p8ump556qilaabkr0tm.apps.googleusercontent.com",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://www.googleapis.com/oauth2/v3/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://accounts.google.com/o/oauth2/auth",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Attendance Token",
+							"type": "string"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Token Copy",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "clientSecret",
+							"value": "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",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "357576576271-79ffcmthasofcgajkvrdv1aspgbe515o.apps.googleusercontent.com",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "body",
+							"type": "string"
+						},
+						{
+							"key": "scope",
+							"value": "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "useBrowser",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "accessTokenUrl",
+							"value": "https://www.googleapis.com/oauth2/v3/token",
+							"type": "string"
+						},
+						{
+							"key": "authUrl",
+							"value": "https://accounts.google.com/o/oauth2/auth",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "Attendance Token",
+							"type": "string"
+						},
+						{
+							"key": "challengeAlgorithm",
+							"value": "S256",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": ""
 				}
 			},
 			"response": []
