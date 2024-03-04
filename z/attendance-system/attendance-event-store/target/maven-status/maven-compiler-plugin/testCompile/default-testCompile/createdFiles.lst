@@ -1,0 +1,7 @@
+com\attendance\event\store\system\services\EventServiceTest.class
+com\attendance\event\store\system\services\AttendanceCalculatorServiceTest.class
+com\attendance\event\store\system\AttendanceEventStoreApplicationTest.class
+com\attendance\event\store\system\repository\SwipeRepositoryTest.class
+com\attendance\event\store\system\exception\RestExceptionHandlerTest.class
+com\attendance\event\store\system\controller\EventControllerTest.class
+com\attendance\event\store\system\exception\EntityNotFoundExceptionTest.class

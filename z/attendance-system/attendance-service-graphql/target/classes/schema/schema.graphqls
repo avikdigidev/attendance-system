@@ -1,0 +1,23 @@
+type Query {
+	getAttendance(employeeId : Int) : AttendanceRecord
+}
+
+type AttendanceRecord {
+	attendanceList : [Attendance]
+	apiError : ApiError
+}
+
+type ApiError {
+	status : String
+	message : String
+	debugMessage : String
+}
+
+type Attendance {
+	employeeId : Int
+	attendanceStatus : String
+	date : String
+	totalTime : String
+}
+
+schema {  query: Query}

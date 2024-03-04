@@ -1,0 +1,373 @@
+{
+	"info": {
+		"_postman_id": "c67a9493-2b28-4b99-ac76-84487c5f5b52",
+		"name": "AttendanceRecordSytem_Excercise",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16579246"
+	},
+	"item": [
+		{
+			"name": "Swipe Service",
+			"item": [
+				{
+					"name": "Swipe Events",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeId\":1300,\r\n    \"eventTimestamp\":\"2024-02-29T12:20:30Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/attendance-event-store/api/swipe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"attendance-event-store",
+								"api",
+								"swipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Swipe api gateway",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"employeeId\":400,\r\n    \"eventTimestamp\":\"2024-02-29T19:30:30Z\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8766/attendance-event-store/api/swipe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8766",
+							"path": [
+								"attendance-event-store",
+								"api",
+								"swipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Calculate Attendance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/attendance-event-store/api/calculateAttendance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"attendance-event-store",
+								"api",
+								"calculateAttendance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Calculate Attendance gateway",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8766/attendance-event-store/api/calculateAttendance",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8766",
+							"path": [
+								"attendance-event-store",
+								"api",
+								"calculateAttendance"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance Service",
+			"item": [
+				{
+					"name": "getEmployeeAttendance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8987/attendance-system-service/api/attendance/getAttendance/400",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8987",
+							"path": [
+								"attendance-system-service",
+								"api",
+								"attendance",
+								"getAttendance",
+								"400"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Employee Attendance gateway",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8987/attendance-system-service/api/attendance/allEmployees",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8987",
+							"path": [
+								"attendance-system-service",
+								"api",
+								"attendance",
+								"allEmployees"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all employee list gateway",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8987/attendance-system-service/api/attendance/getAttendance/1600",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8987",
+							"path": [
+								"attendance-system-service",
+								"api",
+								"attendance",
+								"getAttendance",
+								"1600"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Attendance Service Graphql",
+			"item": [
+				{
+					"name": "Get Attendance - Graphql",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\r\n    getAttendance(employeeId :400){,\r\n    \r\n        attendanceList{\r\n            employeeId\r\n            attendanceStatus\r\n            date\r\n            totalTime\r\n        }\r\n        apiError{\r\n            status\r\n            message\r\n            debugMessage\r\n        }\r\n\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9190/attendance-system-graphql/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9190",
+							"path": [
+								"attendance-system-graphql",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Attendance Graphql API",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "query{\r\n    getAttendance(employeeId :100){\r\n        employeeId\r\n\t    attendanceStatus\r\n        date\r\n\t    totalTime\r\n    }\r\n}",
+								"variables": ""
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8766/attendance-system-graphql/graphql",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8766",
+							"path": [
+								"attendance-system-graphql",
+								"graphql"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "Get Token",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "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",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "840437503646-1c31tmthm0bjno1fbrhkgsbq39dtnqfc.apps.googleusercontent.com",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "body",
+									"type": "string"
+								},
+								{
+									"key": "scope",
+									"value": "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://www.googleapis.com/oauth2/v3/token",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://accounts.google.com/o/oauth2/auth",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "Attendance Token",
+									"type": "string"
+								},
+								{
+									"key": "challengeAlgorithm",
+									"value": "S256",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

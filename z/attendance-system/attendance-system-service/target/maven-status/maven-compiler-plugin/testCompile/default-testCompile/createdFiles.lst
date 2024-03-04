@@ -1,0 +1,7 @@
+com\attendance\services\AttendanceServiceTest.class
+com\attendance\controller\AttendanceControllerTest.class
+com\attendance\repository\SwipeRepositoryTest.class
+com\attendance\exception\CustomExceptionTest.class
+com\attendance\exception\RestExceptionHandlerTest.class
+com\attendance\AttendanceSystemServiceApplicationTest.class
+com\attendance\controller\AttendanceControllerAdviceTest.class

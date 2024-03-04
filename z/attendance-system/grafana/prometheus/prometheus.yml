@@ -1,0 +1,38 @@
+global:
+  evaluation_interval: 10s
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'attendance-event-store'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 3s
+    static_configs:
+      - targets: ['attendance-event-store:8080']
+        labels:
+          application: 'Attendance Event Store'
+
+  - job_name: 'attendance-system-service'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 3s
+    static_configs:
+      - targets: [ 'attendance-system-service:8080' ]
+        labels:
+          application: 'Attendance System Service'
+
+  - job_name: 'attendance-system-graphql'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 3s
+    static_configs:
+      - targets: [ 'attendance-system-graphql:8080' ]
+        labels:
+          application: 'Attendance System Service Graphql'
+
+  - job_name: 'attendance-system-api-gateway'
+    metrics_path: '/actuator/prometheus'
+    scrape_interval: 3s
+    static_configs:
+      - targets: [ 'attendance-system-api-gateway:8080' ]
+        labels:
+          application: 'Attendance System API Gateway'
+
+
