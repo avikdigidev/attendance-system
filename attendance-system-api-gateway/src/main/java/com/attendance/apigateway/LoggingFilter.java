@@ -31,7 +31,7 @@ public class LoggingFilter implements GlobalFilter {
 	HttpTransport transport;
 	@Autowired
 	JsonFactory jsonFactory;
-	@Value("${google.oauth.clientId}")
+	@Value("529304582008-aitqvcehvqpb7p8ump556qilaabkr0tm.apps.googleusercontent.com")
 	private String clientId;
 	private Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
 
@@ -64,7 +64,7 @@ public class LoggingFilter implements GlobalFilter {
 		if (idToken != null) {
 			GoogleIdToken.Payload payload = idToken.getPayload();
 			String userId = payload.getSubject();
-			if(!employeeId.equals(userId)){
+			if(employeeId.equals(userId)){
 				logger.error(INVALID_TOKEN);
 				throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, INVALID_TOKEN);
 			}
