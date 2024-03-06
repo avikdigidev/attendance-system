@@ -51,12 +51,11 @@ public class AttendanceCalculatorService {
     public int calculateAttendance(List<EventDetail> firstSwipeInByEmployeeAndDate,
                                    List<EventDetail> lastSwipeOutByEmployeeAndDate) {
 
-        Map<Integer, List<Instant>> map;
         AtomicInteger sendRecordCount = new AtomicInteger(0);
         Map<Integer, String> emailMapping = firstSwipeInByEmployeeAndDate.stream()
                 .collect(Collectors.toMap(EventDetail::getEmployeeid, EventDetail::getEmailid));
 
-        map = Stream.concat(firstSwipeInByEmployeeAndDate.stream(), lastSwipeOutByEmployeeAndDate.stream())
+        Map<Integer, List<Instant>> map = Stream.concat(firstSwipeInByEmployeeAndDate.stream(), lastSwipeOutByEmployeeAndDate.stream())
                 .collect(Collectors.groupingBy(EventDetail::getEmployeeid,
                         Collectors.mapping(EventDetail::getTimestamp, Collectors.toList())));
 
