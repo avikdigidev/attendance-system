@@ -31,7 +31,7 @@ public class LoggingFilter implements GlobalFilter {
 	HttpTransport transport;
 	@Autowired
 	JsonFactory jsonFactory;
-	@Value("529304582008-aitqvcehvqpb7p8ump556qilaabkr0tm.apps.googleusercontent.com")
+	@Value("357576576271-53ks6fa1uf4e0dth552i4v9ggtdfjprr.apps.googleusercontent.com")
 	private String clientId;
 	private Logger logger = LoggerFactory.getLogger(LoggingFilter.class);
 
